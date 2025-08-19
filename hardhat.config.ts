@@ -15,10 +15,6 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    fuji: {
-      url: process.env.FUJI_RPC_URL || "",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-    },
     morphTestnet: {
       url: process.env.MORPH_RPC_URL || "",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
@@ -26,7 +22,7 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY || "",
+      morphTestnet: "your_morph_explorer_api_key", // Optional
     },
     customChains: [
       {
@@ -39,8 +35,11 @@ const config: HardhatUserConfig = {
       },
     ],
   },
-  sourcify: {
-    enabled: false,
+  gasReporter: {
+    enabled: process.env.REPORT_GAS !== undefined,
+    currency: "USD",
+    gasPrice: 10,
+    coinmarketcap: process.env.CMC_API_KEY, // Optional
   },
 };
 
